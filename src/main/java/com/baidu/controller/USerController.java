@@ -14,6 +14,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 
 public class USerController {
+    /**
+     *
+     * 登录
+     *
+     */
     @Autowired
     private UserService service ;
     @RequestMapping("/user/login")
