@@ -1,7 +1,8 @@
 package com.baidu.service;
 
+import com.baidu.entity.Result;
 import com.baidu.pojo.User;
 
 public interface UserService {
-    boolean login(User user);
+    Result login(User user);
 }

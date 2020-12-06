@@ -19,15 +19,16 @@
     <!--读取数据库配置文件-->
     <context:property-placeholder location="classpath:MyBatisConfig.properties"/>
     <!--整合MyBatis-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.username}"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-
+        <property name="configLocation" value="classpath:mybatis-cofig.xml"/>
+        <property name="mapperLocations" value="classpath:com/baidu/dao/*Mapper.xml"/>
     </bean>
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.baidu.dao"/>
@@ -41,7 +42,7 @@
     <tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManager">
         <tx:attributes>
             <tx:method name="find*" read-only="true"/>
-            <tx:method name="*" isolation="DEFAULT"/>
+            <tx:method name="find*" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
     <aop:config>

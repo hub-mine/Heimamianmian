@@ -1,5 +1,7 @@
-com\baidu\controller\USerController.class
+com\baidu\dao\UserDao.class
 com\baidu\entity\Result.class
 com\baidu\service\imp\ServiceImpl.class
 com\baidu\pojo\User.class
+com\baidu\controller\CourseController.class
+com\baidu\controller\USerController.class
 com\baidu\service\UserService.class

@@ -89,7 +89,7 @@
 
                           // 发送请求，获得响应结果
                           // axios发送请求
-                          axios.post("http://127.0.0.1:8000/user/login", formData).then(response=>{
+                          axios.post("/user/login", formData).then(response=>{
                               // response.data 才是后台响应数据
                               console.log(JSON.stringify(response));
 

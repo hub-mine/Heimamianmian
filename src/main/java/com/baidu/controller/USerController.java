@@ -5,9 +5,7 @@ import com.baidu.pojo.User;
 import com.baidu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,19 +19,25 @@ public class USerController {
      */
     @Autowired
     private UserService service ;
-    @RequestMapping("/user/login")
-    public @ResponseBody Result login(@RequestBody User user){
-        boolean login = service.login(user);
-        System.out.println(user);
-        if(login){
+    @PostMapping("/user/login")
+    @ResponseBody
+    public  Result login(@RequestBody User user,HttpSession session){
 
-            Result result = new Result();
-            result.setFlag(true);
-            result.setMessage("loginOk");
-            return result;
-        }else {
-            return new Result(false,"密码错误");
-        }
+        Result result = service.login(user);
 
+        return result;
+    }
+    /**
+     * 退出
+     */
+
+    @GetMapping("/user/logout")
+    @ResponseBody
+    public Result logout(HttpSession session){
+        session.invalidate();
+        Result result = new Result();
+        result.setFlag(true);
+        result.setMessage("logout OK");
+        return result;
     }
 }
